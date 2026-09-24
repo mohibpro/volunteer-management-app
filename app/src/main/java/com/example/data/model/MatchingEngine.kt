@@ -5,6 +5,7 @@ data class FilterCriteria(
     val selectedCause: String? = null,
     val selectedWorkMode: WorkMode? = null,
     val selectedCommitment: CommitmentType? = null,
+    val selectedCity: String? = null,
     val maxDistanceKm: Int = 50,
     val onlyOpen: Boolean = true,
     val sortBy: SortOption = SortOption.SMART_MATCH
@@ -126,11 +127,21 @@ object MatchingEngine {
         "Fundraising"
     )
 
+    val PAKISTANI_CITIES = listOf(
+        "Karachi",
+        "Lahore",
+        "Islamabad",
+        "Rawalpindi",
+        "Peshawar",
+        "Multan",
+        "Quetta"
+    )
+
     val ALL_PERKS = listOf(
         "Verified Certificate",
-        "Snacks & Refreshments",
-        "Travel Allowance",
-        "ServeSync Badge",
+        "Chai & Refreshments",
+        "Travel Allowance (PKR 1,500/day)",
+        "ServeSync Volunteer Badge",
         "Letter of Recommendation",
         "Free Event T-shirt"
     )

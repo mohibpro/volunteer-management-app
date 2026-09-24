@@ -1,6 +1,7 @@
 package com.example.ui.screens.organizer
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -480,8 +481,21 @@ fun OrganizerDashboardScreen(
                         OutlinedTextField(value = orgTagline, onValueChange = { orgTagline = it }, label = { Text("Tagline / Mission") }, singleLine = true)
                         OutlinedTextField(value = orgDesc, onValueChange = { orgDesc = it }, label = { Text("About") }, minLines = 2)
                         OutlinedTextField(value = orgWebsite, onValueChange = { orgWebsite = it }, label = { Text("Website") }, singleLine = true)
+                        OutlinedTextField(value = orgPhone, onValueChange = { orgPhone = it }, label = { Text("Phone (+92)") }, placeholder = { Text("+92 21 111 000 000") }, singleLine = true)
                         OutlinedTextField(value = orgEmail, onValueChange = { orgEmail = it }, label = { Text("Contact Email") }, singleLine = true)
-                        OutlinedTextField(value = orgCity, onValueChange = { orgCity = it }, label = { Text("City") }, singleLine = true)
+                        OutlinedTextField(value = orgCity, onValueChange = { orgCity = it }, label = { Text("City (Pakistan)") }, singleLine = true)
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())
+                        ) {
+                            com.example.data.model.MatchingEngine.PAKISTANI_CITIES.forEach { pCity ->
+                                FilterChip(
+                                    selected = orgCity.equals(pCity, ignoreCase = true),
+                                    onClick = { orgCity = pCity },
+                                    label = { Text(pCity, fontSize = 11.sp) }
+                                )
+                            }
+                        }
                     }
                 },
                 confirmButton = {

@@ -74,7 +74,7 @@ class VolunteerRepository(
                     name = "$fullName's Initiative",
                     description = "Community impact organization focused on local engagement and outreach.",
                     email = email.trim(),
-                    city = "San Francisco, CA"
+                    city = "Karachi"
                 )
             )
         }
@@ -101,14 +101,18 @@ class VolunteerRepository(
                             opp.title.contains(filter.query, ignoreCase = true) ||
                             opp.description.contains(filter.query, ignoreCase = true) ||
                             opp.cause.contains(filter.query, ignoreCase = true) ||
+                            opp.locationName.contains(filter.query, ignoreCase = true) ||
                             (orgMap[opp.orgId]?.name?.contains(filter.query, ignoreCase = true) == true)
 
                     val matchesCause = filter.selectedCause == null || opp.cause.equals(filter.selectedCause, ignoreCase = true)
                     val matchesMode = filter.selectedWorkMode == null || opp.workMode == filter.selectedWorkMode
                     val matchesCommitment = filter.selectedCommitment == null || opp.commitmentType == filter.selectedCommitment
+                    val matchesCity = filter.selectedCity == null ||
+                            opp.locationName.contains(filter.selectedCity, ignoreCase = true) ||
+                            (orgMap[opp.orgId]?.city?.contains(filter.selectedCity, ignoreCase = true) == true)
                     val matchesOpen = !filter.onlyOpen || opp.isOpen
 
-                    matchesQuery && matchesCause && matchesMode && matchesCommitment && matchesOpen
+                    matchesQuery && matchesCause && matchesMode && matchesCommitment && matchesCity && matchesOpen
                 }
                 .map { opp ->
                     val org = orgMap[opp.orgId]

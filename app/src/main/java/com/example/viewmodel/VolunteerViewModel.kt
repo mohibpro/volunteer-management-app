@@ -80,6 +80,13 @@ class VolunteerViewModel(
         _filterCriteria.update { it.copy(selectedCommitment = comm) }
     }
 
+    fun selectCity(city: String?) {
+        _filterCriteria.update {
+            val newCity = if (it.selectedCity == city) null else city
+            it.copy(selectedCity = newCity)
+        }
+    }
+
     fun setSortBy(sort: SortOption) {
         _filterCriteria.update { it.copy(sortBy = sort) }
     }

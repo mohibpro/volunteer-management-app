@@ -44,7 +44,7 @@ fun CreateOpportunityScreen(
     var capacity by remember { mutableStateOf("15") }
     var contactPerson by remember { mutableStateOf("") }
     var selectedSkills by remember { mutableStateOf<List<String>>(emptyList()) }
-    var selectedPerks by remember { mutableStateOf(listOf("Verified Certificate", "Snacks & Refreshments")) }
+    var selectedPerks by remember { mutableStateOf(listOf("Verified Certificate", "Chai & Refreshments")) }
 
     LaunchedEffect(uiState.creationSuccess) {
         if (uiState.creationSuccess) {
@@ -143,7 +143,7 @@ fun CreateOpportunityScreen(
                 value = title,
                 onValueChange = { title = it },
                 label = { Text("Opportunity Title *") },
-                placeholder = { Text("e.g. Community Garden Steward") },
+                placeholder = { Text("e.g. Tree Plantation Drive or Ration Distribution") },
                 singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -197,12 +197,31 @@ fun CreateOpportunityScreen(
                 value = locationName,
                 onValueChange = { locationName = it },
                 label = { Text("Location Name / Virtual Link *") },
-                placeholder = { Text("e.g. Golden Gate Park or Zoom") },
+                placeholder = { Text("e.g. Saylani Dastarkhwan, Karachi or Online") },
                 singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
                     .testTag("opp_location_input")
             )
+
+            // Pakistani Cities Quick Chips
+            Text("Select Major City", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                MatchingEngine.PAKISTANI_CITIES.forEach { city ->
+                    FilterChip(
+                        selected = locationName.contains(city, ignoreCase = true),
+                        onClick = {
+                            if (!locationName.contains(city, ignoreCase = true)) {
+                                locationName = if (locationName.isBlank()) city else "$locationName, $city"
+                            }
+                        },
+                        label = { Text(city, fontSize = 11.sp) }
+                    )
+                }
+            }
 
             // Date & Commitment
             Text("Schedule & Logistics", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
@@ -298,8 +317,8 @@ fun CreateOpportunityScreen(
             OutlinedTextField(
                 value = contactPerson,
                 onValueChange = { contactPerson = it },
-                label = { Text("Point of Contact (Name & Email)") },
-                placeholder = { Text("e.g. Sarah Jenkins (volunteer@org.org)") },
+                label = { Text("Point of Contact (Name & Phone / Email)") },
+                placeholder = { Text("e.g. Dr. Tariq Mansoor (+92 321 4455667)") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )

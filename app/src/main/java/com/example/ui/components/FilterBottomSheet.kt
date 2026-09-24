@@ -33,6 +33,7 @@ fun FilterBottomSheet(
     var tempCause by remember { mutableStateOf(currentFilter.selectedCause) }
     var tempWorkMode by remember { mutableStateOf(currentFilter.selectedWorkMode) }
     var tempCommitment by remember { mutableStateOf(currentFilter.selectedCommitment) }
+    var tempCity by remember { mutableStateOf(currentFilter.selectedCity) }
     var tempDistance by remember { mutableStateOf(currentFilter.maxDistanceKm.toFloat()) }
     var tempSort by remember { mutableStateOf(currentFilter.sortBy) }
 
@@ -60,6 +61,33 @@ fun FilterBottomSheet(
                 )
                 IconButton(onClick = onDismiss) {
                     Icon(Icons.Default.Close, contentDescription = "Close")
+                }
+            }
+
+            // City / Region Filter (Pakistani Cities)
+            Text(
+                text = "City / Region (Pakistan)",
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold
+            )
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                FilterChip(
+                    selected = tempCity == null,
+                    onClick = { tempCity = null },
+                    label = { Text("All Cities") },
+                    modifier = Modifier.testTag("filter_city_all")
+                )
+                MatchingEngine.PAKISTANI_CITIES.forEach { city ->
+                    FilterChip(
+                        selected = tempCity == city,
+                        onClick = { tempCity = if (tempCity == city) null else city },
+                        label = { Text(city) },
+                        modifier = Modifier.testTag("filter_city_$city")
+                    )
                 }
             }
 
@@ -197,6 +225,7 @@ fun FilterBottomSheet(
                         tempCause = null
                         tempWorkMode = null
                         tempCommitment = null
+                        tempCity = null
                         tempDistance = 50f
                         tempSort = SortOption.SMART_MATCH
                         onReset()
@@ -216,6 +245,7 @@ fun FilterBottomSheet(
                                 selectedCause = tempCause,
                                 selectedWorkMode = tempWorkMode,
                                 selectedCommitment = tempCommitment,
+                                selectedCity = tempCity,
                                 maxDistanceKm = tempDistance.toInt(),
                                 sortBy = tempSort
                             )

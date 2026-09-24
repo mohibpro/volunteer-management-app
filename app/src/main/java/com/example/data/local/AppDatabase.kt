@@ -40,7 +40,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "servesync_database"
+                    "servesync_pk_db"
                 )
                     .addCallback(DatabaseCallback(scope))
                     .fallbackToDestructiveMigration()

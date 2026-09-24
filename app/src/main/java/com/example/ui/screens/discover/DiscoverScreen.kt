@@ -57,7 +57,7 @@ fun DiscoverScreen(
                     OutlinedTextField(
                         value = filterCriteria.query,
                         onValueChange = { volunteerViewModel.setQuery(it) },
-                        placeholder = { Text("Search causes, skills, NGO...") },
+                        placeholder = { Text("Search causes, skills, Alkhidmat, Saylani...") },
                         leadingIcon = {
                             Icon(Icons.Default.Search, contentDescription = "Search")
                         },
@@ -82,7 +82,8 @@ fun DiscoverScreen(
                     // Filter Button with indicator badge if filters active
                     val hasActiveFilters = filterCriteria.selectedCause != null ||
                             filterCriteria.selectedWorkMode != null ||
-                            filterCriteria.selectedCommitment != null
+                            filterCriteria.selectedCommitment != null ||
+                            filterCriteria.selectedCity != null
 
                     BadgedBox(
                         badge = {
@@ -245,6 +246,7 @@ fun DiscoverScreen(
                     volunteerViewModel.selectCause(newFilter.selectedCause)
                     volunteerViewModel.selectWorkMode(newFilter.selectedWorkMode)
                     volunteerViewModel.selectCommitment(newFilter.selectedCommitment)
+                    volunteerViewModel.selectCity(newFilter.selectedCity)
                     volunteerViewModel.setMaxDistance(newFilter.maxDistanceKm)
                     volunteerViewModel.setSortBy(newFilter.sortBy)
                 },

@@ -241,7 +241,8 @@ fun VolunteerProfileScreen(
                     OutlinedTextField(
                         value = phone,
                         onValueChange = { phone = it },
-                        label = { Text("Contact Phone") },
+                        label = { Text("Contact Phone (+92)") },
+                        placeholder = { Text("+92 300 1234567") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -249,10 +250,26 @@ fun VolunteerProfileScreen(
                     OutlinedTextField(
                         value = city,
                         onValueChange = { city = it },
-                        label = { Text("City & Neighborhood") },
+                        label = { Text("City / Area") },
+                        placeholder = { Text("e.g. Karachi, Clifton") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
+
+                    // Quick Pakistani Cities Selector
+                    Text("Select City", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        MatchingEngine.PAKISTANI_CITIES.forEach { pCity ->
+                            FilterChip(
+                                selected = city.equals(pCity, ignoreCase = true),
+                                onClick = { city = pCity },
+                                label = { Text(pCity, fontSize = 11.sp) }
+                            )
+                        }
+                    }
 
                     OutlinedTextField(
                         value = bio,
