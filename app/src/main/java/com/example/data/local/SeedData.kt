@@ -1,0 +1,246 @@
+package com.example.data.local
+
+import com.example.data.model.*
+
+object SeedData {
+
+    val defaultVolunteer = UserEntity(
+        id = 1L,
+        email = "alex.chen@example.org",
+        fullName = "Alex Chen",
+        phone = "+1 (415) 555-0192",
+        bio = "Passionate community organizer and volunteer advocate. Dedicated to environmental conservation and equitable youth education.",
+        avatarUrl = "",
+        city = "San Francisco, CA",
+        latitude = 37.7749,
+        longitude = -122.4194,
+        searchRadiusKm = 25,
+        workModePreference = WorkMode.HYBRID,
+        hoursPerWeek = 8,
+        availableDays = listOf("Saturday", "Sunday", "Thursday"),
+        skills = listOf("First Aid & CPR", "Teaching", "Event Management", "Logistics & Driving"),
+        causes = listOf("Environment", "Education", "Food Security", "Disaster Relief"),
+        completedHours = 18.5,
+        badges = listOf("Community Champion", "First 10 Hours", "Eco Hero", "Lifesaver"),
+        createdAt = System.currentTimeMillis() - 30L * 24 * 3600 * 1000
+    )
+
+    val defaultOrganizer = UserEntity(
+        id = 2L,
+        email = "sarah.director@earthguard.org",
+        role = UserRole.ORGANIZER,
+        fullName = "Sarah Jenkins",
+        phone = "+1 (415) 555-4811",
+        bio = "Program Director at EarthGuard Alliance and coordinator for San Francisco Community Impact coalition.",
+        avatarUrl = "",
+        city = "San Francisco, CA",
+        completedHours = 0.0,
+        createdAt = System.currentTimeMillis() - 90L * 24 * 3600 * 1000
+    )
+
+    val sampleOrganizations = listOf(
+        OrganizationEntity(
+            id = 1L,
+            adminUserId = 2L,
+            name = "EarthGuard Alliance",
+            tagline = "Restoring native biodiversity & coastlines",
+            description = "EarthGuard Alliance is a 501(c)(3) grassroots organization dedicated to protecting urban biodiversity, wetlands, and open public green spaces.",
+            website = "https://earthguard.example.org",
+            email = "contact@earthguard.example.org",
+            phone = "+1 (415) 800-4321",
+            city = "San Francisco, CA",
+            isVerified = true,
+            causes = listOf("Environment", "Disaster Relief"),
+            volunteerCount = 340,
+            rating = 4.95
+        ),
+        OrganizationEntity(
+            id = 2L,
+            adminUserId = 2L,
+            name = "City Hope Food Collective",
+            tagline = "Nourishing families across the Bay Area",
+            description = "Working to eliminate food insecurity through local pantry networks, fresh produce rescue, and dignity-centered community meals.",
+            website = "https://cityhopefood.example.org",
+            email = "volunteer@cityhopefood.org",
+            phone = "+1 (415) 720-9944",
+            city = "Oakland, CA",
+            isVerified = true,
+            causes = listOf("Food Security", "Homeless Support"),
+            volunteerCount = 520,
+            rating = 4.88
+        ),
+        OrganizationEntity(
+            id = 3L,
+            adminUserId = 2L,
+            name = "Code & Read Foundation",
+            tagline = "Empowering next-gen learners through mentorship",
+            description = "Bringing interactive STEM and foundational literacy coaching to underserved elementary and middle school students.",
+            website = "https://coderead.example.org",
+            email = "mentors@coderead.example.org",
+            phone = "+1 (415) 610-8833",
+            city = "San Francisco, CA",
+            isVerified = true,
+            causes = listOf("Education", "Youth Mentorship"),
+            volunteerCount = 210,
+            rating = 4.92
+        ),
+        OrganizationEntity(
+            id = 4L,
+            adminUserId = 2L,
+            name = "Pawsitive Haven Animal Rescue",
+            tagline = "Compassionate care for rescue pets",
+            description = "A no-kill shelter providing medical treatment, loving foster homes, and adoption matchmaking for rescue animals.",
+            website = "https://pawsitivehaven.example.org",
+            email = "info@pawsitivehaven.org",
+            phone = "+1 (415) 933-2211",
+            city = "San Francisco, CA",
+            isVerified = true,
+            causes = listOf("Animal Welfare"),
+            volunteerCount = 180,
+            rating = 4.96
+        )
+    )
+
+    val sampleOpportunities = listOf(
+        OpportunityEntity(
+            id = 1L,
+            orgId = 1L,
+            title = "Coastal Dune & Native Flora Restoration",
+            description = "Join our conservation team for a high-impact morning restoring endangered native dune plants at Ocean Beach. Volunteers will help remove invasive ice plants, plant native dune grasses, and install soil stabilizers. Tools, protective gloves, and expert guidance will be provided.",
+            cause = "Environment",
+            workMode = WorkMode.ONSITE,
+            locationName = "Ocean Beach, San Francisco",
+            latitude = 37.7594,
+            longitude = -122.5107,
+            startDate = "Saturday, Oct 10",
+            endDate = "Saturday, Oct 10",
+            timeSlot = "9:00 AM - 1:00 PM",
+            commitmentType = CommitmentType.ONE_TIME,
+            dailyHours = 4.0,
+            totalEstimatedHours = 4.0,
+            requiredSkills = listOf("Logistics & Driving", "Gardening"),
+            perks = listOf("Verified Certificate", "Snacks & Refreshments", "Free Event T-shirt", "ServeSync Badge"),
+            capacity = 20,
+            acceptedCount = 14,
+            isOpen = true,
+            contactPerson = "Sarah Jenkins (Director)"
+        ),
+        OpportunityEntity(
+            id = 2L,
+            orgId = 3L,
+            title = "Virtual STEM & Math Mentor for Middle Schoolers",
+            description = "Support students in grades 6-8 by providing weekly online tutoring in mathematics, basic coding, and science homework. Mentors build confidence and academic resilience in small 1-on-1 Zoom breakout sessions.",
+            cause = "Education",
+            workMode = WorkMode.REMOTE,
+            locationName = "Online / Zoom Video",
+            latitude = 37.7749,
+            longitude = -122.4194,
+            startDate = "Oct 15 - Nov 20",
+            endDate = "Recurring Weekly",
+            timeSlot = "Tues & Thurs, 4:00 PM - 5:30 PM",
+            commitmentType = CommitmentType.RECURRING,
+            dailyHours = 1.5,
+            totalEstimatedHours = 12.0,
+            requiredSkills = listOf("Teaching", "Web Development"),
+            perks = listOf("Verified Certificate", "Letter of Recommendation", "ServeSync Badge"),
+            capacity = 12,
+            acceptedCount = 8,
+            isOpen = true,
+            contactPerson = "David Wu (Volunteer Lead)"
+        ),
+        OpportunityEntity(
+            id = 3L,
+            orgId = 2L,
+            title = "Weekend Food Pantry Distribution & Box Packing",
+            description = "Help sort fresh farm produce, pack dry grocery hampers, and assist community members during our drive-through and walk-up food pantry distribution. Great team atmosphere and instant direct community impact!",
+            cause = "Food Security",
+            workMode = WorkMode.ONSITE,
+            locationName = "Mission District Community Center, SF",
+            latitude = 37.7600,
+            longitude = -122.4199,
+            startDate = "Sunday, Oct 11",
+            endDate = "Sunday, Oct 11",
+            timeSlot = "8:30 AM - 12:30 PM",
+            commitmentType = CommitmentType.ONE_TIME,
+            dailyHours = 4.0,
+            totalEstimatedHours = 4.0,
+            requiredSkills = listOf("Event Management", "Food Preparation", "First Aid & CPR"),
+            perks = listOf("Verified Certificate", "Snacks & Refreshments", "ServeSync Badge"),
+            capacity = 15,
+            acceptedCount = 11,
+            isOpen = true,
+            contactPerson = "Elena Rostova (Logistics Coord.)"
+        ),
+        OpportunityEntity(
+            id = 4L,
+            orgId = 4L,
+            title = "Animal Shelter Photography & Adoption Stories",
+            description = "Use your creative eye to take portrait photographs of adoptable dogs and cats, write heartfelt personality blurbs, and assist our social media team in connecting rescue pets with forever homes.",
+            cause = "Animal Welfare",
+            workMode = WorkMode.HYBRID,
+            locationName = "Paws Haven Center, Potrero Hill, SF",
+            latitude = 37.7577,
+            longitude = -122.3995,
+            startDate = "Flexible Schedule",
+            endDate = "Ongoing",
+            timeSlot = "Weekends or Afternoons",
+            commitmentType = CommitmentType.FLEXIBLE,
+            dailyHours = 2.5,
+            totalEstimatedHours = 10.0,
+            requiredSkills = listOf("Photography", "Social Media"),
+            perks = listOf("Verified Certificate", "Letter of Recommendation", "ServeSync Badge"),
+            capacity = 6,
+            acceptedCount = 4,
+            isOpen = true,
+            contactPerson = "Clara Vance (Adoptions Lead)"
+        ),
+        OpportunityEntity(
+            id = 5L,
+            orgId = 1L,
+            title = "Emergency Disaster Preparedness Kit Assembly",
+            description = "Assemble rapid-deployment emergency survival kits including water purification, first aid supplies, solar chargers, and non-perishables for community readiness prior to the winter season.",
+            cause = "Disaster Relief",
+            workMode = WorkMode.ONSITE,
+            locationName = "SOMA Community Warehouse, SF",
+            latitude = 37.7785,
+            longitude = -122.4056,
+            startDate = "Saturday, Oct 24",
+            endDate = "Saturday, Oct 24",
+            timeSlot = "10:00 AM - 2:00 PM",
+            commitmentType = CommitmentType.ONE_TIME,
+            dailyHours = 4.0,
+            totalEstimatedHours = 4.0,
+            requiredSkills = listOf("First Aid & CPR", "Logistics & Driving"),
+            perks = listOf("Verified Certificate", "Travel Allowance", "Snacks & Refreshments"),
+            capacity = 18,
+            acceptedCount = 6,
+            isOpen = true,
+            contactPerson = "Marcus Cole (Safety Officer)"
+        )
+    )
+
+    val sampleApplications = listOf(
+        ApplicationEntity(
+            id = 1L,
+            opportunityId = 1L,
+            volunteerUserId = 1L,
+            status = ApplicationStatus.ACCEPTED,
+            applicationNote = "I have 3 years experience with Bay Area conservation projects and am CPR certified.",
+            appliedAt = System.currentTimeMillis() - 3L * 24 * 3600 * 1000,
+            updatedAt = System.currentTimeMillis() - 1L * 24 * 3600 * 1000,
+            hoursLogged = 0.0,
+            organizerFeedback = "Welcome Alex! Excited to have your leadership on the dunes."
+        ),
+        ApplicationEntity(
+            id = 2L,
+            opportunityId = 3L,
+            volunteerUserId = 1L,
+            status = ApplicationStatus.COMPLETED,
+            applicationNote = "Available all Sunday morning to support hamper packing and food loading.",
+            appliedAt = System.currentTimeMillis() - 14L * 24 * 3600 * 1000,
+            updatedAt = System.currentTimeMillis() - 7L * 24 * 3600 * 1000,
+            hoursLogged = 4.0,
+            organizerFeedback = "Outstanding work Alex, helped feed over 240 families!"
+        )
+    )
+}

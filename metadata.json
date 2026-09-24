@@ -1,0 +1,6 @@
+{
+  "name": "ServeSync",
+  "description": "Volunteer management platform connecting passionate volunteers with non-profits, NGOs, and community causes through smart skills and interest matching.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
